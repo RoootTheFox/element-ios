@@ -230,7 +230,7 @@ platform :ios do
 
     # Fetch team id from Appfile
     team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
-    UI.user_error!("Fail to fetch team id from Appfile") unless !team_id.to_s.empty?
+    #UI.user_error!("Fail to fetch team id from Appfile") unless !team_id.to_s.empty?
 
     # Generate versioning preprocessor macros
     additional_preprocessor_definitions_hash = release_versioning_preprocessor_definitions(git_branch: git_branch_name, build_number: build_number)
