@@ -254,7 +254,7 @@ platform :ios do
     clear_derived_data(derived_data_path: ENV["DERIVED_DATA_PATH"])
     
     # Setup project provisioning profiles
-    download_provisioning_profiles(adhoc: adhoc)
+    #download_provisioning_profiles(adhoc: adhoc)
     disable_automatic_code_signing
     update_project_provisioning_profiles
 
@@ -267,11 +267,11 @@ platform :ios do
     # Select a config
     if adhoc
       export_method = "ad-hoc"
-      main_provisioning_profile = ENV["ADHOC_MAIN_PROVISIONING_PROFILE_SPECIFIER"]
-      share_extension_provisioning_profile = ENV["ADHOC_SHARE_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
-      siri_intents_provisioning_profile = ENV["ADHOC_SIRI_INTENTS_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
-      nse_provisioning_profile = ENV["ADHOC_NSE_PROVISIONING_PROFILE_SPECIFIER"]
-      broadcast_upload_extension_provisioning_profile = ENV["ADHOC_BROADCAST_UPLOAD_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
+#      main_provisioning_profile = ENV["ADHOC_MAIN_PROVISIONING_PROFILE_SPECIFIER"]
+#      share_extension_provisioning_profile = ENV["ADHOC_SHARE_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
+#      siri_intents_provisioning_profile = ENV["ADHOC_SIRI_INTENTS_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
+#      nse_provisioning_profile = ENV["ADHOC_NSE_PROVISIONING_PROFILE_SPECIFIER"]
+#      broadcast_upload_extension_provisioning_profile = ENV["ADHOC_BROADCAST_UPLOAD_EXTENSION_PROVISIONING_PROFILE_SPECIFIER"]
     else
       export_method = "app-store"
       main_provisioning_profile = ENV["APPSTORE_MAIN_PROVISIONING_PROFILE_SPECIFIER"]
