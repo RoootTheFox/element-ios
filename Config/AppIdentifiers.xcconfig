@@ -22,7 +22,7 @@ APPLICATION_GROUP_IDENTIFIER = group.im.vector
 APPLICATION_SCHEME = element
 
 // Team
-DEVELOPMENT_TEAM = 7J4U792NQT
+DEVELOPMENT_TEAM = 
 
 
 // Provisioning profiles
