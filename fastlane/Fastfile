@@ -297,15 +297,16 @@ platform :ios do
       export_options: {
         method: export_method,
         signingStyle: "manual",
-        teamID: team_id,
-        signingCertificate: ENV["APPSTORE_SIGNING_CERTIFICATE"],
-        provisioningProfiles: {
-          ENV["MAIN_BUNDLE_ID"] => main_provisioning_profile,
-          ENV["SHARE_EXTENSION_BUNDLE_ID"] => share_extension_provisioning_profile,
-          ENV["NSE_BUNDLE_ID"] => nse_provisioning_profile,
-          ENV["SIRI_INTENTS_EXTENSION_BUNDLE_ID"] => siri_intents_provisioning_profile,
-          ENV["BROADCAST_UPLOAD_EXTENSION_BUNDLE_ID"] => broadcast_upload_extension_provisioning_profile,
-        },
+        teamID: "",
+#        signingCertificate: ENV["APPSTORE_SIGNING_CERTIFICATE"],
+        signingCertificate: "",
+#        provisioningProfiles: {
+#          ENV["MAIN_BUNDLE_ID"] => main_provisioning_profile,
+#          ENV["SHARE_EXTENSION_BUNDLE_ID"] => share_extension_provisioning_profile,
+#          ENV["NSE_BUNDLE_ID"] => nse_provisioning_profile,
+#          ENV["SIRI_INTENTS_EXTENSION_BUNDLE_ID"] => siri_intents_provisioning_profile,
+#          ENV["BROADCAST_UPLOAD_EXTENSION_BUNDLE_ID"] => broadcast_upload_extension_provisioning_profile,
+#        },
         iCloudContainerEnvironment: "Production",
       },
     )
