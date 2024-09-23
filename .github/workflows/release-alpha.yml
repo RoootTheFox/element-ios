@@ -75,7 +75,8 @@ jobs:
       # and QR link as 'DIAWI_QR_CODE_LINK' when the Diawi upload succeed
       - name: Build Ad-hoc release and send it to Diawi
         run: bundle exec fastlane adhoc
-#        env:
+        env:
+           FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 30
 #          APPSTORECONNECT_KEY_ID: ${{ secrets.APPSTORECONNECT_KEY_ID }}
 #          APPSTORECONNECT_KEY_ISSUER_ID: ${{ secrets.APPSTORECONNECT_KEY_ISSUER_ID }}
 #          APPSTORECONNECT_KEY_CONTENT: ${{ secrets.APPSTORECONNECT_KEY_CONTENT }}
