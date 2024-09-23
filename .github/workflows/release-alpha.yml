@@ -17,7 +17,7 @@ jobs:
   build:
     # Only run for PRs that contain the trigger label. The action will fail for forks due to
     # missing secrets, but there's no need to handle this as it won't run automatically.
-    if: contains(github.event.pull_request.labels.*.name, 'Trigger-PR-Build')
+    #if: contains(github.event.pull_request.labels.*.name, 'Trigger-PR-Build')
 
     name: Release
     runs-on: macos-14
