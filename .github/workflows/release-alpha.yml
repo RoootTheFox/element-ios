@@ -2,7 +2,7 @@ name: Build alpha release
 
 on:
   push:
-    branches: ["*"]
+    branches: [ develop ]
 
   workflow_dispatch:
   # Triggers the workflow on any pull request
