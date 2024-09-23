@@ -312,6 +312,10 @@ platform :ios do
 	        iCloudContainerEnvironment: "Production",
       },
     )
+    sh("ls", "-lahc", ENV["ARCHIVE_PATH"])
+    # todo: ldid fakesign shit
+    # ...
+    sh("zip", "-vr", "meow.zip", ENV["ARCHIVE_PATH"])
   end
 
   #### Private ####
