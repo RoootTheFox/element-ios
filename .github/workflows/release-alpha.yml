@@ -1,10 +1,11 @@
 name: Build alpha release
 
 on:
-
+  push:
+    branch: "*"
   # Triggers the workflow on any pull request
-  pull_request:
-    types: [ labeled, synchronize, opened, reopened ]
+#  pull_request:
+#    types: [ labeled, synchronize, opened, reopened ]
 
 env:
   # Make the git branch for a PR available to our Fastfile
@@ -61,35 +62,35 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       # Import alpha release private signing certificate
-      - name: Import signing certificate
-        uses: apple-actions/import-codesign-certs@v1
-        with:
-          p12-file-base64: ${{ secrets.ALPHA_CERTIFICATES_P12 }}
-          p12-password: ${{ secrets.ALPHA_CERTIFICATES_P12_PASSWORD }}
+#      - name: Import signing certificate
+#        uses: apple-actions/import-codesign-certs@v1
+#        with:
+#          p12-file-base64: ${{ secrets.ALPHA_CERTIFICATES_P12 }}
+#          p12-password: ${{ secrets.ALPHA_CERTIFICATES_P12_PASSWORD }}
 
       # Main step
       # The Ad-hoc release link will be referenced as 'DIAWI_FILE_LINK'
       # and QR link as 'DIAWI_QR_CODE_LINK' when the Diawi upload succeed
       - name: Build Ad-hoc release and send it to Diawi
-        run: bundle exec fastlane alpha
-        env:
-          APPSTORECONNECT_KEY_ID: ${{ secrets.APPSTORECONNECT_KEY_ID }}
-          APPSTORECONNECT_KEY_ISSUER_ID: ${{ secrets.APPSTORECONNECT_KEY_ISSUER_ID }}
-          APPSTORECONNECT_KEY_CONTENT: ${{ secrets.APPSTORECONNECT_KEY_CONTENT }}
-          DIAWI_API_TOKEN: ${{ secrets.DIAWI_API_TOKEN }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: bundle exec fastlane adhoc
+#        env:
+#          APPSTORECONNECT_KEY_ID: ${{ secrets.APPSTORECONNECT_KEY_ID }}
+#          APPSTORECONNECT_KEY_ISSUER_ID: ${{ secrets.APPSTORECONNECT_KEY_ISSUER_ID }}
+#          APPSTORECONNECT_KEY_CONTENT: ${{ secrets.APPSTORECONNECT_KEY_CONTENT }}
+#          DIAWI_API_TOKEN: ${{ secrets.DIAWI_API_TOKEN }}
+#          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
-      - name: Add or update PR comment with Ad-hoc release informations
-        uses: NejcZdovc/comment-pr@v1
-        with:
-          message: |
-            :iphone: Scan the QR code below to install the build for this PR. 
-            :lock: This build is for internal testing purpose. Only devices listed in the ad-hoc provisioning profile can install Element Alpha.  
+#      - name: Add or update PR comment with Ad-hoc release informations
+#        uses: NejcZdovc/comment-pr@v1
+#        with:
+#          message: |
+#            :iphone: Scan the QR code below to install the build for this PR. 
+#            :lock: This build is for internal testing purpose. Only devices listed in the ad-hoc provisioning profile can install Element Alpha.  
 
-            ![QR code](${{ env.DIAWI_QR_CODE_LINK }})  
+#            ![QR code](${{ env.DIAWI_QR_CODE_LINK }})  
 
-            If you can't scan the QR code you can install the build via this link: ${{ env.DIAWI_FILE_LINK }}
-          # Enables to identify and update existing Ad-hoc release message on new commit in the PR
-          identifier: "GITHUB_COMMENT_ADHOC_RELEASE"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#            If you can't scan the QR code you can install the build via this link: ${{ env.DIAWI_FILE_LINK }}
+#          # Enables to identify and update existing Ad-hoc release message on new commit in the PR
+#          identifier: "GITHUB_COMMENT_ADHOC_RELEASE"
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
