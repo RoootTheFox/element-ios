@@ -62,6 +62,7 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+          brew install ldid
 
       # Import alpha release private signing certificate
 #      - name: Import signing certificate
@@ -82,6 +83,27 @@ jobs:
 #          APPSTORECONNECT_KEY_CONTENT: ${{ secrets.APPSTORECONNECT_KEY_CONTENT }}
 #          DIAWI_API_TOKEN: ${{ secrets.DIAWI_API_TOKEN }}
 #          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+      - name: fakesign !!
+        run: |
+          app_path="out/Riot.xcarchive/Products/Applications/Element.app"
+
+          # Fake sign the app
+          ldid -SRiot/SupportingFiles/Riot.entitlements $app_path/Element
+
+          # fake sign the Frameworks
+          for f in Frameworks/*; do
+            g="${f/Frameworks\//}"
+            h="${g/\.framework/}"
+            bin="$f/$h"
+            ldid -S $bin || true
+          done
+
+          # fake sign the plugins
+          ldid -SBroadcastUploadExtension/SupportingFiles/BroadcastUploadExtension.entitlements $app_path/PlugIns/BroadcastUploadExtension.appex/BroadcastUploadExtension || true
+          ldid -SRiotNSE/RiotNSE.entitlements $app_path/PlugIns/RiotNSE.appex/RiotNSE || true
+          echo "zipping mrrp"
+          zip -vr meow.zip $app_path
 
       - name: upload free fortnite hacks
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
