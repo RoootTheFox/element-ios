@@ -25,7 +25,7 @@ protocol TimeProvider {
 class DefaultTimeProvider: TimeProvider {
     
     func nowTs() -> TimeInterval {
-        return Date.now.timeIntervalSince1970
+        return Date().timeIntervalSince1970
     }
     
 }

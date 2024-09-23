@@ -41,7 +41,7 @@ window.riotIOS.onMessage = function(event) {
 
     // Make sure to have one id
     if (!event.data._id) {
-        event.data._id = Date.now() + "-" + Math.random().toString(36);
+        event.data._id = Date() + "-" + Math.random().toString(36);
     }
     
     // Do not SPAM ObjC with event already managed
