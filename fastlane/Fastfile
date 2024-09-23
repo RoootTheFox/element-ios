@@ -256,7 +256,7 @@ platform :ios do
     # Setup project provisioning profiles
     #download_provisioning_profiles(adhoc: adhoc)
     disable_automatic_code_signing
-    update_project_provisioning_profiles
+    #update_project_provisioning_profiles
 
     # Update build number
     update_build_number(build_number: build_number)
