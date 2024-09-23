@@ -315,7 +315,7 @@ platform :ios do
     sh("ls", "-lahc", ".")
     # todo: ldid fakesign shit
     # ...
-    sh("zip", "-vr", "meow.zip", ".")
+    sh("zip", "-vr", "./../meow.zip", "./../"+ENV["ARCHIVE_PATH"])
   end
 
   #### Private ####
